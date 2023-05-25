@@ -34,7 +34,7 @@ llvm_register_toolchains()
 ##
 git_repository(
     name = "com_google_absl",
-    branch = "master",
+    commit = "c3e9485bdc0556d2cb454ac106786170e3c95e8a",  # 2023-05-24
     remote = "https://github.com/abseil/abseil-cpp",
 )
 
@@ -43,7 +43,7 @@ git_repository(
 ##
 git_repository(
     name = "com_google_gtest",
-    branch = "main",  # Live-at-head like absl
+    commit = "45804691223635953f311cf31a10c632553bbfc3",  # 2023-05-24
     remote = "https://github.com/google/googletest",
 )
 
@@ -51,13 +51,13 @@ git_repository(
 # https://github.com/google/re2/tree/abseil
 http_archive(
     name = "com_googlesource_code_re2",
-    sha256 = "906d0df8ff48f8d3a00a808827f009a840190f404559f649cb8e4d7143255ef9",
-    strip_prefix = "re2-a276a8c738735a0fe45a6ee590fe2df69bcf4502",
-    urls = ["https://github.com/google/re2/archive/a276a8c738735a0fe45a6ee590fe2df69bcf4502.zip"],  # 2022-04-08
+    sha256 = "cb8b5312a65f2598954545a76e8bce913f35fbb3a21a5c88797a4448e9f9b9d9",
+    strip_prefix = "re2-578843a516fd1da7084ae46209a75f3613b6065e",
+    urls = ["https://github.com/google/re2/archive/578843a516fd1da7084ae46209a75f3613b6065e.zip"],  # 2023-05-24
 )
 
 git_repository(
     name = "bazel_skylib",
     remote = "https://github.com/bazelbuild/bazel-skylib",
-    tag = "1.2.1",  # Latest as of 2022-05-01
+    tag = "1.4.1",  # Latest as of 2023-05-24
 )
