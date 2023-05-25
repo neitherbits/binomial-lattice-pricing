@@ -4,17 +4,23 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 ##
 ## Toolchain
 ##
-git_repository(
-    name = "com_grailbio_bazel_toolchain",
-    commit = "9e71d562023dc7994e747110ee1ca345ad6b4413",  # Latest as of 2022-05-01
-    remote = "https://github.com/grailbio/bazel-toolchain.git",
+BAZEL_TOOLCHAIN_TAG = "0.8.2"
+
+BAZEL_TOOLCHAIN_SHA = "0fc3a2b0c9c929920f4bed8f2b446a8274cad41f5ee823fd3faa0d7641f20db0"
+
+http_archive(
+    name = "com_grail_bazel_toolchain",
+    canonical_id = BAZEL_TOOLCHAIN_TAG,
+    sha256 = BAZEL_TOOLCHAIN_SHA,
+    strip_prefix = "bazel-toolchain-{tag}".format(tag = BAZEL_TOOLCHAIN_TAG),
+    url = "https://github.com/grailbio/bazel-toolchain/archive/refs/tags/{tag}.tar.gz".format(tag = BAZEL_TOOLCHAIN_TAG),
 )
 
-load("@com_grailbio_bazel_toolchain//toolchain:deps.bzl", "bazel_toolchain_dependencies")
+load("@com_grail_bazel_toolchain//toolchain:deps.bzl", "bazel_toolchain_dependencies")
 
 bazel_toolchain_dependencies()
 
-load("@com_grailbio_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
+load("@com_grail_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
 
 llvm_toolchain(
     name = "llvm_toolchain",
