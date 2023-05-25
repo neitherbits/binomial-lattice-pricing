@@ -6,7 +6,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 ##
 git_repository(
     name = "com_grailbio_bazel_toolchain",
-    commit = "9e71d562023dc7994e747110ee1ca345ad6b4413", # Latest as of 2022-05-01
+    commit = "9e71d562023dc7994e747110ee1ca345ad6b4413",  # Latest as of 2022-05-01
     remote = "https://github.com/grailbio/bazel-toolchain.git",
 )
 
@@ -43,7 +43,7 @@ git_repository(
 ##
 git_repository(
     name = "com_google_gtest",
-    commit = "8ded48c37be09d8cc3665af1b414c5d53c0862e7",  # Latest as of 2022-05-01
+    branch = "main",  # Live-at-head like absl
     remote = "https://github.com/google/googletest",
 )
 
