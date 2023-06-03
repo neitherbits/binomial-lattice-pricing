@@ -33,7 +33,7 @@ RUN if [[ `dpkg --print-architecture` == "arm64" ]]; then \
 #
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
-    && apt-get -y install --no-install-recommends openjdk-11-jdk lcov
+    && apt-get -y install --no-install-recommends openjdk-11-jdk lcov clangd
 
 #
 # Set up command history volume

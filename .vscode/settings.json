@@ -84,5 +84,10 @@
     "editor.formatOnSave": true,
     "testMate.cpp.test.executables": "bazel-bin/**/*.runfiles/**/*{test,Test,TEST}*",
     "bazel.enableCodeLens": true,
-    "bazel.buildifierFixOnFormat": true
+    "bazel.buildifierFixOnFormat": true,
+    "clangd.arguments": [
+        "--header-insertion=never",
+        "--compile-commands-dir=${workspaceFolder}/",
+        "--query-driver=**"
+    ]
 }

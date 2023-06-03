@@ -67,3 +67,22 @@ git_repository(
     remote = "https://github.com/bazelbuild/bazel-skylib",
     tag = "1.4.1",  # Latest as of 2023-05-24
 )
+
+# Hedron's Compile Commands Extractor for Bazel
+# https://github.com/hedronvision/bazel-compile-commands-extractor
+# Run: `bazel run @hedron_compile_commands//:refresh_all` to generate compile_commands.json
+http_archive(
+    name = "hedron_compile_commands",
+
+    # When you first run this tool, it'll recommend a sha256 hash to put here with a message like: "DEBUG: Rule 'hedron_compile_commands' indicated that a canonical reproducible form can be obtained by modifying arguments sha256 = ..."
+    sha256 = "3cd0e49f0f4a6d406c1d74b53b7616f5e24f5fd319eafc1bf8eee6e14124d115",
+
+    # Replace the commit hash in both places (below) with the latest, rather than using the stale one here.
+    # Even better, set up Renovate and let it do the work for you (see "Suggestion: Updates" in the README).
+    strip_prefix = "bazel-compile-commands-extractor-3dddf205a1f5cde20faf2444c1757abe0564ff4c",
+    url = "https://github.com/hedronvision/bazel-compile-commands-extractor/archive/3dddf205a1f5cde20faf2444c1757abe0564ff4c.tar.gz",
+)
+
+load("@hedron_compile_commands//:workspace_setup.bzl", "hedron_compile_commands_setup")
+
+hedron_compile_commands_setup()
