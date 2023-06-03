@@ -1,5 +1,7 @@
 #include "sample/sample.h"
 
+#include <cstdlib>
+
 namespace sample {
 
 int Sample::Parse(std::string_view str) {
