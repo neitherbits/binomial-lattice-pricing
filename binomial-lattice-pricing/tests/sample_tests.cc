@@ -1,20 +1,24 @@
 #include <gtest/gtest.h>
 
+#include "binomial-lattice-pricing/model.h"
 #include "binomial-lattice-pricing/node.h"
 
 namespace node {
 
-TEST(Node, Parse) {
-  EXPECT_EQ(Node::Parse(""), 0);
-  EXPECT_EQ(Node::Parse("("), 1);
-  EXPECT_EQ(Node::Parse("(((("), 4);
-  EXPECT_EQ(Node::Parse(".(((("), 0);
-  EXPECT_EQ(Node::Parse("((.(("), 2);
-  EXPECT_DEATH(Node::Parse("((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("
-                           "(((((((((((((((((((((((((((((((("),
-               ".*");
+TEST(Node, Test) {
   Node n{1234};
   EXPECT_EQ(n.id, 1234);
+  EXPECT_EQ(n.S, 0);
 }
 
 }  // namespace node
+
+namespace model {
+
+TEST(Model, Test) {
+  Model m = Model(1, 1, 1, 1, 1, 1);
+  EXPECT_EQ(m.S, 1);
+  EXPECT_EQ(m.delta, 1);
+}
+
+}  // namespace model

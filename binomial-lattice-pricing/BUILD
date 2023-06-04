@@ -4,9 +4,11 @@ load("//build:rules.bzl", "cc_fuzzer")
 cc_library(
     name = "binomial_lattice_pricing",
     srcs = [
+        "model.cc",
         "node.cc",
     ],
     hdrs = [
+        "model.h",
         "node.h",
     ],
 )

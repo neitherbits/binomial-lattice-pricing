@@ -1,18 +1,32 @@
 #pragma once
 
-#include <string_view>
-
 namespace node {
 
 class Node {
 public:
   int id{};
+  float S = 0;
+  float Delta = 0;
+  float B = 0;
+  float period = 0;
   /**
-   * Parse a sample input.
-   *
-   * @return The number of '(' characters the string starts with.
+   * C (American)
    */
-  static int Parse(std::string_view str);
+  float C_A = 0;
+  /**
+   * P (American)
+   */
+  float P_A = 0;
+  /**
+   * C (European)
+   */
+  float C_E = 0;
+  /**
+   * P (European)
+   */
+  float P_E = 0;
+  bool call_early_exercise = false;
+  bool put_early_exercise = false;
 };
 
 }  // namespace node
