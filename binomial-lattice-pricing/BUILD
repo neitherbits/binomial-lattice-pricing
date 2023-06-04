@@ -5,11 +5,10 @@ cc_library(
     name = "binomial_lattice_pricing",
     srcs = [
         "model.cc",
-        "node.cc",
     ],
     hdrs = [
+        "Node.h",
         "model.h",
-        "node.h",
     ],
 )
 

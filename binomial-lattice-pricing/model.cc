@@ -2,10 +2,9 @@
 
 #include <math.h>
 
-#include "binomial-lattice-pricing/node.h"
+#include "binomial-lattice-pricing/Node.h"
 
 namespace model {
-// std::normal_distribution<float> norm{0, 1};
 float norm_pdf(float x) {
   return std::exp(-std::pow(x, 2) / 2) / std::sqrt(2 * M_PI);
 }

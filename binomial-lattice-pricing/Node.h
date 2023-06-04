@@ -1,9 +1,6 @@
 #pragma once
 
-namespace node {
-
-class Node {
-public:
+struct Node {
   int id{};
   float S = 0;
   float Delta = 0;
@@ -28,5 +25,3 @@ public:
   bool call_early_exercise = false;
   bool put_early_exercise = false;
 };
-
-}  // namespace node
