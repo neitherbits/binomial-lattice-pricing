@@ -38,5 +38,8 @@ RUN if [[ `dpkg --print-architecture` == "arm64" ]]; then \
 # Set up command history volume
 # See https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
 #
-RUN mkdir /commandhistory \
-    && chown -R $USERNAME /commandhistory
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
+    && mkdir /commandhistory \
+    && touch /commandhistory/.bash_history \
+    && chown -R $USERNAME /commandhistory \
+    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
