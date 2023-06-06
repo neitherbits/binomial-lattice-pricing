@@ -30,30 +30,30 @@ Model::Model(float S, float delta, float r, float sigma, float K, float T) {
       (std::log(S / K) + (r - delta + 0.5 * std::pow(sigma, 2) * T)) / (sigma * std::sqrt(T));
   float d2 =
       (std::log(S / K) + (r - delta - 0.5 * std::pow(sigma, 2) * T)) / (sigma * std::sqrt(T));
-  this->C_E = S * std::exp(-delta * T) * norm_cdf(d1) - K * std::exp(-r * T) * norm_cdf(d2);
-  this->P_E = K * std::exp(-r * T) * norm_cdf(-d2) - S * std::exp(-delta * T) * norm_cdf(-d1);
-  this->Delta_Call = std::exp(-delta * T) * norm_cdf(d1);
-  this->Delta_Put = -std::exp(-delta * T) * norm_cdf(-d1);
-  this->Gamma_Call = (1.0 / (S * sigma * std::sqrt(T))) * std::exp(-delta * T) * norm_pdf(d1);
-  this->Gamma_Put = Gamma_Call;
+  this->_C_E = S * std::exp(-delta * T) * norm_cdf(d1) - K * std::exp(-r * T) * norm_cdf(d2);
+  this->_P_E = K * std::exp(-r * T) * norm_cdf(-d2) - S * std::exp(-delta * T) * norm_cdf(-d1);
+  this->_Delta_Call = std::exp(-delta * T) * norm_cdf(d1);
+  this->_Delta_Put = -std::exp(-delta * T) * norm_cdf(-d1);
+  this->_Gamma_Call = (1.0 / (S * sigma * std::sqrt(T))) * std::exp(-delta * T) * norm_pdf(d1);
+  this->_Gamma_Put = _Gamma_Call;
   // Scaled by 1/100
-  this->nu_Call = (S * std::exp(-delta * T) * norm_pdf(d1) * std::sqrt(T)) / 100.0;
-  this->nu_Put = nu_Call;
+  this->_vega_Call = (S * std::exp(-delta * T) * norm_pdf(d1) * std::sqrt(T)) / 100.0;
+  this->_vega_Put = _vega_Call;
   // Scaled by 1/365
-  this->zero_Call =
+  this->_theta_Call =
       (delta * S * std::exp(-delta * T) * norm_cdf(d1) - r * K * std::exp(-r * T) * norm_cdf(d2) -
        (sigma / (2 * std::sqrt(T))) * S * std::exp(-delta * T) * norm_pdf(d1)) /
       365.0;
-  this->zero_Put =
+  this->_theta_Put =
       (r * K * std::exp(-r * T) * norm_cdf(-d2) - delta * S * std::exp(-delta * T) * norm_cdf(-d1) -
        (sigma / (2 * std::sqrt(T))) * S * std::exp(-delta * T) * norm_pdf(d1)) /
       365.0;
   // Scaled 1/10,000
-  this->rho_Call = (T * K * std::exp(-r * T) * norm_cdf(d2)) / 10000.0;
-  this->rho_Put = (-T * K * std::exp(-r * T) * norm_cdf(-d2)) / 10000.0;
+  this->_rho_Call = (T * K * std::exp(-r * T) * norm_cdf(d2)) / 10000.0;
+  this->_rho_Put = (-T * K * std::exp(-r * T) * norm_cdf(-d2)) / 10000.0;
   // Scaled 1/10,000
-  this->Psi_Call = (-T * S * std::exp(-delta * T) * norm_cdf(d1)) / 10000.0;
-  this->Psi_Put = (T * S * std::exp(-delta * T) * norm_cdf(-d1)) / 10000.0;
+  this->_Psi_Call = (-T * S * std::exp(-delta * T) * norm_cdf(d1)) / 10000.0;
+  this->_Psi_Put = (T * S * std::exp(-delta * T) * norm_cdf(-d1)) / 10000.0;
 }
 
 // NOTE: This is OOP brain damage. Model really should be a struct and this function should be
