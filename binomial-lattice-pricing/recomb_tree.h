@@ -8,12 +8,16 @@ namespace recomb_tree {
 typedef std::map<int, std::vector<node::Node>> DumbTree;
 
 class RecombinantTree {
+private:
+  DumbTree _tree{};
+
 public:
   const model::Model& _model;
   model::Style style{};
   int periods{};
-  DumbTree tree{};
 
   RecombinantTree(model::Model& _model, model::Style style, int periods);
+
+  DumbTree tree() { return _tree; };
 };
 }  // namespace recomb_tree
