@@ -1,8 +1,24 @@
 #pragma once
 
 #include <cmath>
+#include <map>
+#include <vector>
+
+#include "binomial-lattice-pricing/Node.h"
 
 namespace model {
+
+// TODO: implement a real tree. I'm just copying the python code for now.
+typedef std::map<int, std::vector<node::Node>> DumbTree;
+
+enum class Style {
+  JR,
+  JR_risk_neutral,
+  CRR_classic,
+  CRR_drift,
+
+};
+
 class Model {
 public:
   float S{};
@@ -27,5 +43,7 @@ public:
   float Psi_Put{};
 
   Model(float S, float delta, float r, float sigma, float K, float T);
+  DumbTree getRecombiningTree(int periods, Style style = Style::CRR_drift);
 };
+
 }  // namespace model

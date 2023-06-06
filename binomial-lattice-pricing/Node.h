@@ -1,5 +1,7 @@
 #pragma once
 
+namespace node {
+
 struct Node {
   int id{};
   float S = 0;
@@ -25,3 +27,4 @@ struct Node {
   bool call_early_exercise = false;
   bool put_early_exercise = false;
 };
+}  // namespace node

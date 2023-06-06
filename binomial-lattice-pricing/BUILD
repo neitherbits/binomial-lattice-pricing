@@ -33,3 +33,11 @@ cc_fuzzer(
         ":binomial_lattice_pricing",
     ],
 )
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cc"],
+    deps = [
+        ":binomial_lattice_pricing",
+    ],
+)
