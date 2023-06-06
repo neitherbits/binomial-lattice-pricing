@@ -8,9 +8,6 @@
 
 namespace model {
 
-// TODO: implement a real tree. I'm just copying the python code for now.
-typedef std::map<int, std::vector<node::Node>> DumbTree;
-
 enum class Style {
   JR,
   JR_risk_neutral,
@@ -19,7 +16,7 @@ enum class Style {
 
 };
 
-class Model {
+struct Model {
 public:
   float S{};
   float delta{};
@@ -42,8 +39,12 @@ public:
   float Psi_Call{};
   float Psi_Put{};
 
+  // Model(const Model& rhs);
+
+  // Model& operator=(const Model& rhs);
+
   Model(float S, float delta, float r, float sigma, float K, float T);
-  DumbTree getRecombiningTree(int periods, Style style = Style::CRR_drift);
+  // DumbTree getRecombiningTree(int periods, Style style = Style::CRR_drift);
 };
 
 }  // namespace model
