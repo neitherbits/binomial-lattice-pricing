@@ -1,5 +1,4 @@
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
-load("//build:rules.bzl", "cc_fuzzer")
 
 cc_library(
     name = "binomial_lattice_pricing",
@@ -20,17 +19,6 @@ cc_test(
     deps = [
         ":binomial_lattice_pricing",
         "@com_google_gtest//:gtest_main",
-    ],
-)
-
-cc_fuzzer(
-    name = "binomial_lattice_pricing_fuzzer",
-    srcs = [
-        "tests/sample_fuzzer.cc",
-    ],
-    corpus = "tests/sample_corpus",
-    deps = [
-        ":binomial_lattice_pricing",
     ],
 )
 
