@@ -25,7 +25,7 @@ Model::Model(float _S, float _delta, float _r, float _sigma, float _K, float _T)
   sigma = _sigma;
   K = _K;
   T = _T;
-  // TODO: refactor this to be faster
+  // TODO: refactor this to be faster/reuse some calculations
   float d1 =
       (std::log(S / K) + (r - delta + 0.5 * std::pow(sigma, 2) * T)) / (sigma * std::sqrt(T));
   float d2 =
