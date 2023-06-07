@@ -4,11 +4,13 @@ cc_library(
     name = "binomial_lattice_pricing",
     srcs = [
         "recomb_tree.cc",
+        "BlackScholes.cc",
     ],
     hdrs = [
         "Model.h",
         "Node.h",
         "recomb_tree.h",
+        "BlackScholes.h",
     ],
 )
 

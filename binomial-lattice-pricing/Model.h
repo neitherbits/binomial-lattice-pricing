@@ -26,13 +26,4 @@ public:
   double T{};
 };
 
-/** TODO: implement functions to calculate the derived quantities in the python library. Should we
-make another struct holding all the quantities, or make individual functions?
-For example:
-  struct BlackScholes{
-    ...
-  };
-  BlackScholes func(Model m);
-*/
-
 }  // namespace model
