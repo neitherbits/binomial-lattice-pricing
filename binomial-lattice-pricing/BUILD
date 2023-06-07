@@ -6,8 +6,8 @@ cc_library(
         "recomb_tree.cc",
     ],
     hdrs = [
+        "Model.h",
         "Node.h",
-        "model.h",
         "recomb_tree.h",
     ],
 )
