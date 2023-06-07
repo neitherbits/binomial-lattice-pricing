@@ -1,28 +1,24 @@
 #pragma once
 
-#include <cmath>
-#include <map>
-#include <vector>
+#include "binomial-lattice-pricing/Model.h"
 
-#include "binomial-lattice-pricing/Node.h"
+namespace black_scholes {
 
-namespace model {
+inline double norm_pdf(double x) {
+  // constexpr double INV_SQRT_2PI = 0.398942280401433;  // 1 / std::sqrt(2 * M_PI);
+  return std::exp(std::pow(x, 2) * -0.5) * 0.398942280401433;
+}
 
-// TODO: implement a real tree. I'm just copying the python code for now.
-typedef std::map<int, std::vector<node::Node>> DumbTree;
+inline double norm_cdf(double x) {
+  // constexpr double INV_SQRT_2 = 0.707106781186548;  // 1 / std::sqrt(2);
+  return 0.5 * (1.0 + erf(x * 0.707106781186548));
+}
 
-enum class Style {
-  JR,
-  JR_risk_neutral,
-  CRR_classic,
-  CRR_drift,
-
-};
-
-class Model {
+// NOTE: is this the right name for this struct?
+struct BlackScholes {
 private:
-  float _C_E{};
-  float _P_E{};
+  float _Call_Eur{};
+  float _Put_Eur{};
   float _Delta_Call{};
   float _Delta_Put{};
   float _Gamma_Call{};
@@ -37,18 +33,10 @@ private:
   float _Psi_Put{};
 
 public:
-  float S{};
-  float delta{};
-  float r{};
-  float sigma{};
-  float K{};
-  float T{};
+  BlackScholes(model::Model& model);
 
-  Model(float S, float delta, float r, float sigma, float K, float T);
-  DumbTree getRecombiningTree(int periods, Style style = Style::CRR_drift);
-
-  float C_E() { return this->_C_E; };
-  float P_E() { return this->_P_E; };
+  float Call_Eur() { return this->_Call_Eur; };
+  float Put_Eur() { return this->_Put_Eur; };
   float Delta_Call() { return this->_Delta_Call; };
   float Delta_Put() { return this->_Delta_Put; };
   float Gamma_Call() { return this->_Gamma_Call; };
@@ -62,5 +50,4 @@ public:
   float Psi_Call() { return this->_Psi_Call; };
   float Psi_Put() { return this->_Psi_Put; };
 };
-
-}  // namespace model
+}  // namespace black_scholes
