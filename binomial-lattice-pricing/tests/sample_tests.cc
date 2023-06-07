@@ -12,5 +12,4 @@ TEST(Model, Test) {
   model::Model m = model::Model{1, 1, 1, 1, 1, 1};
   EXPECT_EQ(m.S, 1);
   EXPECT_EQ(m.delta, 1);
-  // EXPECT_NO_FATAL_FAILURE(m.getRecombiningTree(5));
 }
