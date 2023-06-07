@@ -1,6 +1,6 @@
 #pragma once
 
-#include "binomial-lattice-pricing/model.h"
+#include "binomial-lattice-pricing/Model.h"
 
 namespace recomb_tree {
 
@@ -12,11 +12,12 @@ private:
   DumbTree _tree{};
 
 public:
-  const model::Model& _model;
+  const model::Model& model;
   model::Style style{};
+  node::Option option{};
   int periods{};
 
-  RecombinantTree(model::Model& _model, model::Style style, int periods);
+  RecombinantTree(model::Model& _model, model::Style style, node::Option option, int periods);
 
   DumbTree tree() { return _tree; };
 };

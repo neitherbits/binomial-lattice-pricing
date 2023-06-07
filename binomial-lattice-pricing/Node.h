@@ -2,29 +2,15 @@
 
 namespace node {
 
+// NOTE: where does this belong? Calls and puts live in a Node, so I put it here for now.
+enum class Option { American, European };
+
 struct Node {
-  int id{};
   double S = 0;
   double Delta = 0;
   double B = 0;
-  double period = 0;
-  /**
-   * C (American)
-   */
-  double C_A = 0;
-  /**
-   * P (American)
-   */
-  double P_A = 0;
-  /**
-   * C (European)
-   */
-  double C_E = 0;
-  /**
-   * P (European)
-   */
-  double P_E = 0;
-  bool call_early_exercise = false;
-  bool put_early_exercise = false;
+  int period = 0;  // Is this needed?
+  double call = 0;
+  double put = 0;
 };
 }  // namespace node

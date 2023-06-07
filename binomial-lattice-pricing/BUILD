@@ -3,7 +3,6 @@ load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
 cc_library(
     name = "binomial_lattice_pricing",
     srcs = [
-        "model.cc",
         "recomb_tree.cc",
     ],
     hdrs = [
