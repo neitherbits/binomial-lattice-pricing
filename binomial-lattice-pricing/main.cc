@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 
   int periods = 2000;
   recomb_tree::RecombinantTree r =
-      recomb_tree::RecombinantTree(m, model::Style::JR, node::Option::European, periods);
+      recomb_tree::RecombinantTree(m, model::Style::JR, node::OptionStyle::European, periods);
 
   std::cout << "Model copied into RecombinantTree: (m.S) " << m.S << " == " << r.model.S
             << " (r.model.S)" << std::endl;

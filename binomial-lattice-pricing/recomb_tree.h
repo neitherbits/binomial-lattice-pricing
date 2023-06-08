@@ -14,10 +14,10 @@ private:
 public:
   const model::Model& model;
   model::Style style{};
-  node::Option option{};
+  node::OptionStyle option{};
   int periods{};
 
-  RecombinantTree(model::Model& _model, model::Style style, node::Option option, int periods);
+  RecombinantTree(model::Model& _model, model::Style style, node::OptionStyle option, int periods);
 
   DumbTree tree() { return _tree; };
 };

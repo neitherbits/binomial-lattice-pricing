@@ -4,7 +4,7 @@
 
 namespace recomb_tree {
 
-RecombinantTree::RecombinantTree(model::Model& _model, model::Style style, node::Option option,
+RecombinantTree::RecombinantTree(model::Model& _model, model::Style style, node::OptionStyle option,
                                  int periods)
     : model(_model) {  // C++ black magic
   // this->_model = _model; // See above
@@ -69,7 +69,7 @@ RecombinantTree::RecombinantTree(model::Model& _model, model::Style style, node:
       double put = discount * ((1 - p) * _tree[i - 1][j].put + p * _tree[i - 1][j + 1].put);
 
       // Handle American options
-      if (option == node::Option::American) {
+      if (option == node::OptionStyle::American) {
         call = fmax(call, S - _model.K);
         put = fmax(put, _model.K - S);
       }
