@@ -15,16 +15,32 @@ struct Node {
   double put = 0;
 };
 
-struct AmericanNode {
+template <OptionStyle T>
+struct Node2 {};
+
+template <>
+struct Node2<OptionStyle::American> {
   double S = 0;
   int period = 0;  // Is this needed?
   double value = 0;
 };
 
-struct EuropeanNode {
-  double S = 0;
+template <>
+struct Node2<OptionStyle::European> {
+  // double S = 0;
   int period = 0;  // Is this needed?
   double value = 0;
 };
+
+// struct AmericanNode {
+//   double S = 0;
+//   int period = 0;  // Is this needed?
+//   double value = 0;
+// };
+
+// struct EuropeanNode {
+//   int period = 0;  // Is this needed?
+//   double value = 0;
+// };
 
 }  // namespace node

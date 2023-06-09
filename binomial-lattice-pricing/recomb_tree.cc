@@ -4,8 +4,10 @@
 
 namespace recomb_tree {
 
-RecombinantTree::RecombinantTree(model::Model& _model, model::Style style, node::OptionStyle option,
-                                 int periods)
+template <>
+RecombinantTree<node::OptionStyle::American>::RecombinantTree(model::Model& _model,
+                                                              model::Style style,
+                                                              int periods)
     : model(_model) {  // C++ black magic
   // this->_model = _model; // See above
   this->style = style;
@@ -44,15 +46,17 @@ RecombinantTree::RecombinantTree(model::Model& _model, model::Style style, node:
   }
 
   // NOTE: this is a very bad implementation of a tree
-  _tree[0] = std::vector<node::Node>{};
+  _tree[0] = std::vector<node::Node2<node::OptionStyle::American>>{};
 
   for (int i{0}; i <= periods - 1; ++i) {
     double S = std::pow(u, i) * std::pow(d, (periods - i - 1)) * _model.S;
     double call = fmax(0, S - _model.K);
-    double put = fmax(0, _model.K - S);
+    // double put = fmax(0, _model.K - S);
+
+    double value = call;  // FIXME
 
     int period = periods - 1;
-    node::Node node{S, 0, 0, period, call, put};
+    node::Node2<node::OptionStyle::American> node{S, period, value};
     _tree[0].push_back(node);
   };
 
@@ -61,32 +65,21 @@ RecombinantTree::RecombinantTree(model::Model& _model, model::Style style, node:
           level = levels[i];
           prevlevel = levels[i-1];
     */
-    _tree[i] = std::vector<::node::Node>{};
+    _tree[i] = std::vector<::node::Node2<node::OptionStyle::American>>{};
     for (int j = 0; j < periods - i; ++j) {
-      double S = _tree[i - 1][j + 1].S / u;
       double discount = std::exp(-_model.r * h);
-      double call = discount * ((1 - p) * _tree[i - 1][j].call + p * _tree[i - 1][j + 1].call);
-      double put = discount * ((1 - p) * _tree[i - 1][j].put + p * _tree[i - 1][j + 1].put);
+      double value = discount * ((1 - p) * _tree[i - 1][j].value + p * _tree[i - 1][j + 1].value);
 
       // Handle American options
-      if (option == node::OptionStyle::American) {
-        call = fmax(call, S - _model.K);
-        put = fmax(put, _model.K - S);
-      }
+      double S = _tree[i - 1][j + 1].S / u;
 
-      /** ===Potentially Breaking Change===
-      NOTE: The Delta and B calculations explicitly used the
-      European option in the original algorithm. This will use the American option if the user
-      chooses it.
-      */
-      double Delta = std::exp(-_model.delta * h) *
-                     (_tree[i - 1][j + 1].call - _tree[i - 1][j].call) /
-                     (_tree[i - 1][j + 1].S - _tree[i - 1][j].S);
-      double B = discount * (u * _tree[i - 1][j].call - d * _tree[i - 1][j + 1].call) / (u - d);
+      value = fmax(value, S - _model.K);  // call FIXME
+      // put = fmax(value, _model.K - S);
+      // ^^^^^
 
       int period = periods - i - 1;
 
-      node::Node node{S, Delta, B, period, call, put};
+      node::Node2<node::OptionStyle::American> node{S, period, value};
       _tree[i].push_back(node);
     }
   }
