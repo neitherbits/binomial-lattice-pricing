@@ -1,9 +1,5 @@
 #pragma once
 
-#include <cmath>
-#include <map>
-#include <vector>
-
 #include "binomial-lattice-pricing/Node.h"
 
 namespace model {

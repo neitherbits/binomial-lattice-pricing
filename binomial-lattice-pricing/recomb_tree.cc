@@ -1,6 +1,6 @@
 #include "binomial-lattice-pricing/recomb_tree.h"
 
-#include <stdexcept>
+#include <cmath>
 
 #include "binomial-lattice-pricing/Model.h"
 

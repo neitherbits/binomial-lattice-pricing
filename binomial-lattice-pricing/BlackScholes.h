@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 #include "binomial-lattice-pricing/Model.h"
 
 namespace black_scholes {

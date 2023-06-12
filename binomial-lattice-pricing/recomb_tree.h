@@ -1,5 +1,8 @@
 #pragma once
 
+#include <map>
+#include <vector>
+
 #include "binomial-lattice-pricing/Model.h"
 
 namespace recomb_tree {
