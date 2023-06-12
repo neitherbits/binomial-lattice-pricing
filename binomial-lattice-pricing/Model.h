@@ -19,7 +19,7 @@ struct TransitionParams {
 };
 
 // NOTE: This is a hack so that I don't have to template BlackScholes as well
-struct VirtualModel {
+struct BaseModel {
 public:
   double S{};
   double delta{};
@@ -30,7 +30,7 @@ public:
 };
 
 template <ModelStyle>
-struct Model : VirtualModel {};
+struct Model : BaseModel {};
 
 template <ModelStyle S_>
 TransitionParams transition_params(const Model<S_>& model, const double h);
