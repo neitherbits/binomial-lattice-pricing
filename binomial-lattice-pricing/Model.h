@@ -1,14 +1,10 @@
 #pragma once
 
-#include <cmath>
-#include <map>
-#include <vector>
-
 #include "binomial-lattice-pricing/Node.h"
 
 namespace model {
 
-enum class Style {
+enum class ModelStyle {
   JR,
   JR_risk_neutral,
   CRR_classic,
@@ -16,7 +12,14 @@ enum class Style {
 
 };
 
-struct Model {
+struct TransitionParams {
+  double u{};
+  double d{};
+  double p{};
+};
+
+// NOTE: This is a hack so that I don't have to template BlackScholes as well
+struct BaseModel {
 public:
   double S{};
   double delta{};
@@ -25,5 +28,11 @@ public:
   double K{};
   double T{};
 };
+
+template <ModelStyle>
+struct Model : BaseModel {};
+
+template <ModelStyle S_>
+TransitionParams transition_params(const Model<S_>& model, const double h);
 
 }  // namespace model

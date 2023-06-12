@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 #include "binomial-lattice-pricing/Model.h"
 
 namespace black_scholes {
@@ -33,7 +35,7 @@ private:
   float _Psi_Put{};
 
 public:
-  BlackScholes(model::Model& model);
+  BlackScholes(model::BaseModel& model);
 
   float Call_Eur() { return this->_Call_Eur; };
   float Put_Eur() { return this->_Put_Eur; };
