@@ -4,7 +4,7 @@
 
 namespace black_scholes {
 
-BlackScholes::BlackScholes(model::Model& model) {
+BlackScholes::BlackScholes(model::VirtualModel& model) {
   // TODO: refactor this to be faster/reuse some calculations
   double d1 = (std::log(model.S / model.K) +
                (model.r - model.delta + 0.5 * std::pow(model.sigma, 2) * model.T)) /

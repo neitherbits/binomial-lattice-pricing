@@ -4,12 +4,12 @@
 #include "binomial-lattice-pricing/Node.h"
 
 TEST(Node, Test) {
-  node::Node n{};
+  node::Node<node::OptionStyle::European, node::OptionType::Call> n{};
   EXPECT_EQ(n.S, 0);
 }
 
 TEST(Model, Test) {
-  model::Model m = model::Model{1, 1, 1, 1, 1, 1};
+  model::Model m = model::Model<model::ModelStyle::JR>{1, 1, 1, 1, 1, 1};
   EXPECT_EQ(m.S, 1);
   EXPECT_EQ(m.delta, 1);
 }
